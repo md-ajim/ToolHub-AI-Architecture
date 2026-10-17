@@ -1,0 +1,32 @@
+# Cloudflare Pages deployment config for the frontend (Next.js 16).
+#
+# This is ADDITIVE: the existing Docker-based deployment (docker-compose.yml)
+# is untouched. Use this file only when you intentionally move the frontend to
+# Cloudflare Pages and have a zone/token with Pages access.
+#
+# For server-rendered Next.js on Cloudflare use the @cloudflare/next-on-pages
+# or @opennextjs/cloudflare adapter instead of a static export — the adapter
+# generates its own build output. Docs: ../docs/cloudflare-deployment.md
+
+name = "toolhub-frontend"
+
+# Static export output dir (only for output: "export" builds). For SSR via the
+# next-on-pages adapter this is not set — the adapter configures it.
+pages_build_output_dir = "out"
+
+# ── vars ─────────────────────────────────────────────────────────────────────
+[vars]
+NEXT_PUBLIC_API_URL = "/api/v1"
+
+# ── secrets (never commit real values; set via: wrangler pages secret put) ───
+# NEXT_PUBLIC_SITE_URL    = https://toolhub.ai
+# NEXT_PUBLIC_APP_URL     = https://toolhub.ai
+
+# ── storage binding (only if the backend uses Cloudflare R2) ────────────────
+# [[r2_buckets]]
+# binding = "MEDIA_BUCKET"
+# bucket_name = "toolhub-media"
+
+# Note: Cloudflare Workers AI models are called server-side by the Django
+# backend (backend/apps/ai_tools/providers/cloudflare.py); they are NOT invoked
+# from this Worker, so no Workers AI binding is required here.

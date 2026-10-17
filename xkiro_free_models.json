@@ -1,0 +1,9 @@
+[
+  {"id": "gemini-1.5-flash", "name": "Gemini 1.5 Flash", "provider": "Google (via xKiro)", "is_free": true},
+  {"id": "mistral-7b", "name": "Mistral 7B", "provider": "Mistral (via xKiro)", "is_free": true},
+  {"id": "mixtral-8x7b", "name": "Mixtral 8x7B", "provider": "Mistral (via xKiro)", "is_free": true},
+  {"id": "minmax-m2", "name": "MinMax M2", "provider": "MinMax (via xKiro)", "is_free": true},
+  {"id": "deepseek-v3-flash", "name": "DeepSeek V3 Flash", "provider": "DeepSeek (via xKiro)", "is_free": true},
+  {"id": "qwen-2.5-72b", "name": "Qwen 2.5 72B", "provider": "Qwen (via xKiro)", "is_free": true},
+  {"id": "qwen-2.5-coder-32b", "name": "Qwen 2.5 Coder 32B", "provider": "Qwen (via xKiro)", "is_free": true}
+]

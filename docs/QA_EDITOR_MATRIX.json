@@ -1,0 +1,1246 @@
+{
+ "generated_from": [
+  "docs/model-capability-matrix.json",
+  "backend/apps/ai_tools/live_verification.json"
+ ],
+ "exec_policy": {
+  "LIVE_RUN": "execute now ($0 path)",
+  "DETERMINISTIC_RUN": "execute; pixel-exact assertions only, no AI claim",
+  "RELY_ON_RECORD": "do not re-run (owner funds); verify selector+contract only",
+  "NO_RUN": "UI-state verification only; never execute"
+ },
+ "negative_checks": {
+  "failed_records_excluded_from_compatible": {
+   "fal-esrgan-upscale": true,
+   "fal-flux-schnell-t2i": true,
+   "hf-bria-rmbg": true,
+   "or-gemini-flash-image": true
+  },
+  "mock_in_compatible": [],
+  "mock_in_visible": []
+ },
+ "tools": [
+  {
+   "tool": "background-remove",
+   "status": "READY",
+   "required_capabilities": [
+    "background_removal"
+   ],
+   "visible_models": [
+    "hf-bria-rmbg",
+    "comfyui-local-bg-remove",
+    "local-rmbg-u2net"
+   ],
+   "recommended_model": "local-rmbg-u2net",
+   "models": [
+    {
+     "id": "local-rmbg-u2net",
+     "provider": "local_rmbg",
+     "credits": 1,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": false,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "LIVE_RUN"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 1,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption",
+    "alpha_channel_present"
+   ]
+  },
+  {
+   "tool": "text-to-image",
+   "status": "READY",
+   "required_capabilities": [
+    "text_to_image"
+   ],
+   "visible_models": [
+    "cf-flux-klein-9b",
+    "or-gemini-flash-image",
+    "cf-flux-klein-4b",
+    "fal-flux-schnell-t2i",
+    "or-gpt-image-mini",
+    "or-gemini-lite-image",
+    "cf-leonardo-lucid-origin",
+    "cf-leonardo-phoenix",
+    "cf-sdxl-base",
+    "cf-dreamshaper-8",
+    "cf-sdxl-lightning"
+   ],
+   "recommended_model": "cf-flux-klein-9b",
+   "models": [
+    {
+     "id": "cf-flux-klein-9b",
+     "provider": "cloudflare",
+     "credits": 2,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    },
+    {
+     "id": "cf-flux-klein-4b",
+     "provider": "cloudflare",
+     "credits": 2,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": true,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 2,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "upscale",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "image_upscaling"
+   ],
+   "visible_models": [
+    "fal-esrgan-upscale",
+    "comfyui-local-upscale"
+   ],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption",
+    "dims_increased"
+   ]
+  },
+  {
+   "tool": "enhance",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "image_enhancement"
+   ],
+   "visible_models": [
+    "or-gemini-flash-image",
+    "fal-clarity-enhance"
+   ],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "object-remove",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "object_removal",
+    "inpainting"
+   ],
+   "visible_models": [
+    "fal-qwen-inpaint",
+    "comfyui-local-inpaint",
+    "cf-sd15-inpaint"
+   ],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": true,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption",
+    "no_blank_artifact"
+   ]
+  },
+  {
+   "tool": "inpaint",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "inpainting"
+   ],
+   "visible_models": [
+    "fal-qwen-inpaint",
+    "comfyui-local-inpaint",
+    "cf-sd15-inpaint"
+   ],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": true,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption",
+    "no_blank_artifact"
+   ]
+  },
+  {
+   "tool": "face-restore",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "face_restoration"
+   ],
+   "visible_models": [
+    "comfyui-local-face-restore"
+   ],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "shadow",
+   "status": "READY",
+   "required_capabilities": [
+    "shadow_generation"
+   ],
+   "visible_models": [
+    "photoroom-shadow"
+   ],
+   "recommended_model": "photoroom-shadow",
+   "models": [
+    {
+     "id": "photoroom-shadow",
+     "provider": "photoroom",
+     "credits": 11,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {
+     "strength_pct": 50,
+     "opacity_pct": 45
+    }
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 11,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "background-generate",
+   "status": "READY",
+   "required_capabilities": [
+    "background_generation",
+    "image_to_image"
+   ],
+   "visible_models": [
+    "cf-flux-klein-9b",
+    "hf-qwen-image-edit",
+    "or-gemini-flash-image",
+    "fal-flux-kontext-edit",
+    "cf-flux-klein-4b",
+    "or-gpt-image-mini",
+    "or-gemini-lite-image",
+    "cf-sd15-img2img"
+   ],
+   "recommended_model": "cf-flux-klein-9b",
+   "models": [
+    {
+     "id": "cf-flux-klein-9b",
+     "provider": "cloudflare",
+     "credits": 2,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    },
+    {
+     "id": "cf-flux-klein-4b",
+     "provider": "cloudflare",
+     "credits": 2,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 2,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "marketplace-resize",
+   "status": "READY",
+   "required_capabilities": [
+    "marketplace_resize"
+   ],
+   "visible_models": [],
+   "recommended_model": "local-deterministic",
+   "models": [
+    {
+     "id": "local-deterministic",
+     "provider": "local",
+     "credits": 1,
+     "quality": "TEST_ONLY",
+     "recommended": false,
+     "status": "TEST_ONLY",
+     "exec_class": "DETERMINISTIC_RUN"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {
+     "preset": "amazon-main"
+    }
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 1,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption",
+    "dims_match_preset"
+   ]
+  },
+  {
+   "tool": "product-staging",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "product_staging",
+    "image_to_image"
+   ],
+   "visible_models": [],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "product-photography",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "product_photography",
+    "image_to_image"
+   ],
+   "visible_models": [],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "expand",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "outpainting"
+   ],
+   "visible_models": [
+    "fal-outpaint"
+   ],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption",
+    "dims_increased",
+    "original_preserved"
+   ]
+  },
+  {
+   "tool": "relight",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "relighting"
+   ],
+   "visible_models": [
+    "fal-relight"
+   ],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {
+     "style": "natural"
+    }
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "recolor",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "recoloring"
+   ],
+   "visible_models": [
+    "or-gemini-flash-image",
+    "fal-flux-kontext-edit"
+   ],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {
+     "color": "#2266cc"
+    }
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "retouch",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "retouching"
+   ],
+   "visible_models": [
+    "or-gemini-flash-image",
+    "photoroom-beautify"
+   ],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "fashion-model",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "fashion_model_generation"
+   ],
+   "visible_models": [
+    "fal-fashn-tryon"
+   ],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "ghost-mannequin",
+   "status": "READY",
+   "required_capabilities": [
+    "ghost_mannequin"
+   ],
+   "visible_models": [
+    "photoroom-ghost-mannequin"
+   ],
+   "recommended_model": "photoroom-ghost-mannequin",
+   "models": [
+    {
+     "id": "photoroom-ghost-mannequin",
+     "provider": "photoroom",
+     "credits": 11,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 11,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "flat-lay",
+   "status": "READY",
+   "required_capabilities": [
+    "flat_lay_generation"
+   ],
+   "visible_models": [
+    "photoroom-flat-lay"
+   ],
+   "recommended_model": "photoroom-flat-lay",
+   "models": [
+    {
+     "id": "photoroom-flat-lay",
+     "provider": "photoroom",
+     "credits": 11,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 11,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "fashion-retouch",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "fashion_retouch"
+   ],
+   "visible_models": [
+    "photoroom-beautify"
+   ],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "infographic",
+   "status": "READY",
+   "required_capabilities": [
+    "infographic_generation"
+   ],
+   "visible_models": [],
+   "recommended_model": "local-creative-compose",
+   "models": [
+    {
+     "id": "local-creative-compose",
+     "provider": "local",
+     "credits": 1,
+     "quality": "TEST_ONLY",
+     "recommended": false,
+     "status": "TEST_ONLY",
+     "exec_class": "DETERMINISTIC_RUN"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 1,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "size-chart",
+   "status": "READY",
+   "required_capabilities": [
+    "size_chart_generation"
+   ],
+   "visible_models": [],
+   "recommended_model": "local-creative-compose",
+   "models": [
+    {
+     "id": "local-creative-compose",
+     "provider": "local",
+     "credits": 1,
+     "quality": "TEST_ONLY",
+     "recommended": false,
+     "status": "TEST_ONLY",
+     "exec_class": "DETERMINISTIC_RUN"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 1,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "carousel",
+   "status": "READY",
+   "required_capabilities": [
+    "carousel_generation"
+   ],
+   "visible_models": [],
+   "recommended_model": "local-creative-compose",
+   "models": [
+    {
+     "id": "local-creative-compose",
+     "provider": "local",
+     "credits": 1,
+     "quality": "TEST_ONLY",
+     "recommended": false,
+     "status": "TEST_ONLY",
+     "exec_class": "DETERMINISTIC_RUN"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 1,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "social-creative",
+   "status": "READY",
+   "required_capabilities": [
+    "social_creative_generation"
+   ],
+   "visible_models": [],
+   "recommended_model": "local-creative-compose",
+   "models": [
+    {
+     "id": "local-creative-compose",
+     "provider": "local",
+     "credits": 1,
+     "quality": "TEST_ONLY",
+     "recommended": false,
+     "status": "TEST_ONLY",
+     "exec_class": "DETERMINISTIC_RUN"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 1,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "ad-creative",
+   "status": "READY",
+   "required_capabilities": [
+    "ad_creative_generation"
+   ],
+   "visible_models": [],
+   "recommended_model": "local-creative-compose",
+   "models": [
+    {
+     "id": "local-creative-compose",
+     "provider": "local",
+     "credits": 1,
+     "quality": "TEST_ONLY",
+     "recommended": false,
+     "status": "TEST_ONLY",
+     "exec_class": "DETERMINISTIC_RUN"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 1,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "generative-fill",
+   "status": "READY",
+   "required_capabilities": [
+    "generative_image_editing",
+    "inpainting"
+   ],
+   "visible_models": [
+    "cf-flux-klein-9b",
+    "hf-qwen-image-edit",
+    "fal-qwen-inpaint",
+    "cf-flux-klein-4b",
+    "cf-sd15-img2img"
+   ],
+   "recommended_model": "cf-flux-klein-9b",
+   "models": [
+    {
+     "id": "cf-flux-klein-9b",
+     "provider": "cloudflare",
+     "credits": 2,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    },
+    {
+     "id": "cf-flux-klein-4b",
+     "provider": "cloudflare",
+     "credits": 2,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 2,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption",
+    "no_blank_artifact"
+   ]
+  },
+  {
+   "tool": "product-edit",
+   "status": "READY",
+   "required_capabilities": [
+    "product_editing",
+    "image_to_image"
+   ],
+   "visible_models": [
+    "cf-flux-klein-9b",
+    "hf-qwen-image-edit",
+    "or-gemini-flash-image",
+    "fal-flux-kontext-edit",
+    "cf-flux-klein-4b",
+    "or-gpt-image-mini",
+    "or-gemini-lite-image",
+    "cf-sd15-img2img"
+   ],
+   "recommended_model": "cf-flux-klein-9b",
+   "models": [
+    {
+     "id": "cf-flux-klein-9b",
+     "provider": "cloudflare",
+     "credits": 2,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    },
+    {
+     "id": "cf-flux-klein-4b",
+     "provider": "cloudflare",
+     "credits": 2,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": true,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 2,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "mockup-generate",
+   "status": "READY",
+   "required_capabilities": [
+    "mockup_generation",
+    "image_to_image"
+   ],
+   "visible_models": [
+    "cf-flux-klein-9b",
+    "hf-qwen-image-edit",
+    "or-gemini-flash-image",
+    "fal-flux-kontext-edit",
+    "cf-flux-klein-4b",
+    "or-gpt-image-mini",
+    "or-gemini-lite-image",
+    "cf-sd15-img2img"
+   ],
+   "recommended_model": "cf-flux-klein-9b",
+   "models": [
+    {
+     "id": "cf-flux-klein-9b",
+     "provider": "cloudflare",
+     "credits": 2,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    },
+    {
+     "id": "cf-flux-klein-4b",
+     "provider": "cloudflare",
+     "credits": 2,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": true,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "RELY_ON_RECORD"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": true,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 2,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  },
+  {
+   "tool": "expand-image",
+   "status": "UNAVAILABLE_NO_PRODUCTION_MODEL",
+   "required_capabilities": [
+    "outpainting"
+   ],
+   "visible_models": [
+    "fal-outpaint"
+   ],
+   "recommended_model": null,
+   "models": [],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": null,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption",
+    "dims_increased",
+    "original_preserved"
+   ]
+  },
+  {
+   "tool": "passport-photo",
+   "status": "READY",
+   "required_capabilities": [
+    "background_removal"
+   ],
+   "visible_models": [
+    "hf-bria-rmbg",
+    "comfyui-local-bg-remove",
+    "local-rmbg-u2net"
+   ],
+   "recommended_model": "local-rmbg-u2net",
+   "models": [
+    {
+     "id": "local-rmbg-u2net",
+     "provider": "local_rmbg",
+     "credits": 1,
+     "quality": "VERIFIED_PRODUCTION",
+     "recommended": false,
+     "status": "LIVE_VERIFIED",
+     "exec_class": "LIVE_RUN"
+    }
+   ],
+   "expected_input": {
+    "image": true,
+    "mask": false,
+    "prompt": false,
+    "params": {}
+   },
+   "fixture": "backend/ai-inputs/3.png",
+   "credit_behavior": {
+    "model_floor": 1,
+    "formula": "max(model_floor, ceil(est_USD * R / 0.0094))",
+    "refund_on_fail": true,
+    "idempotent_retry": true
+   },
+   "output_validation": [
+    "exists",
+    "valid_image",
+    "mime_ok",
+    "nonzero_content",
+    "no_corruption"
+   ]
+  }
+ ]
+}

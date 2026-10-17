@@ -1,0 +1,15 @@
+# Cloudflare Pages/Worker local secrets for the frontend (additive; optional).
+#
+# Copy to `.dev.vars` for `wrangler pages dev` / `wrangler dev`:
+#   cp frontend/.dev.vars.example frontend/.dev.vars
+#
+# Real values live in Cloudflare (wrangler pages secret put ...) — never commit.
+
+# Where the Django backend API lives in production. Use a public HTTPS origin:
+#  - Cloudflare Tunnel hostname (e.g. https://api-app.example.com), or
+#  - a VPS behind Cloudflare DNS (e.g. https://api.example.com)
+BACKEND_ORIGIN=https://api-app.example.com
+
+# Public site URLs (used for SEO/metadata/canonical links).
+NEXT_PUBLIC_SITE_URL=https://toolhub.ai
+NEXT_PUBLIC_APP_URL=https://toolhub.ai
