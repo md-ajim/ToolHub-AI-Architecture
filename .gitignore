@@ -1,4 +1,55 @@
-models_cache/
-models_cache/
+# Node modules
+frontend/node_modules/
+
+# Build folders
+frontend/.next/
+frontend/.next/cache/
+frontend/out/
+backend/staticfiles/
+
+backend/.venv*
+# Env files
 .env
-.env
+.env.*
+!.env.example
+.env.development
+.env.production
+.env.local
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+backend/.env
+backend/.env.production
+backend/venv
+backend/.zappa_settings.json
+backend/staticfiles/
+backend/media/
+backend/db.sqlite3
+backend/certs
+
+# Python
+backend/__pycache__/
+*.py[cod]
+
+# Logs
+*.log
+npm-debug.log*
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# Others
+frontend/.turbo/
+.aider*
+
+# Local AI model weights (large, never commit)
+models_cache/
+
+# ComfyUI runtime source + venv + weights (large, never commit). Root-anchored so backend/apps/ai_tools/comfyui/ code is not ignored.
+/comfyui/
+logs/comfyui.log
