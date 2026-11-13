@@ -1,0 +1,68 @@
+model_list:
+  # Google
+  - model_name: gemini-1.5-flash
+    litellm_params:
+      model: openai/gemini-1.5-flash
+      api_base: "https://api.xkiro.com/v1"
+      api_key: os.environ/XKIRO_API_KEY
+
+  # Mistral
+  - model_name: mistral-7b
+    litellm_params:
+      model: openai/mistral-7b-instruct
+      api_base: "https://api.xkiro.com/v1"
+      api_key: os.environ/XKIRO_API_KEY
+  - model_name: mixtral-8x7b
+    litellm_params:
+      model: openai/mixtral-8x7b-instruct
+      api_base: "https://api.xkiro.com/v1"
+      api_key: os.environ/XKIRO_API_KEY
+
+  # MinMax
+  - model_name: minmax-m2
+    litellm_params:
+      model: openai/minmax-abab6-5s
+      api_base: "https://api.xkiro.com/v1"
+      api_key: os.environ/XKIRO_API_KEY
+
+  # DeepSeek
+  - model_name: deepseek-v3-flash
+    litellm_params:
+      model: openai/deepseek-chat
+      api_base: "https://api.xkiro.com/v1"
+      api_key: os.environ/XKIRO_API_KEY
+
+  # Qwen 2.5 Family
+  - model_name: qwen-2.5-72b
+    litellm_params:
+      model: openai/qwen-2.5-72b-instruct
+      api_base: "https://api.xkiro.com/v1"
+      api_key: os.environ/XKIRO_API_KEY
+  - model_name: qwen-2.5-coder-32b
+    litellm_params:
+      model: openai/qwen-2.5-coder-32b-instruct
+      api_base: "https://api.xkiro.com/v1"
+      api_key: os.environ/XKIRO_API_KEY
+  - model_name: qwen-2.5-14b
+    litellm_params:
+      model: openai/qwen-2.5-14b-instruct
+      api_base: "https://api.xkiro.com/v1"
+      api_key: os.environ/XKIRO_API_KEY
+  - model_name: qwen-2.5-7b
+    litellm_params:
+      model: openai/qwen-2.5-7b-instruct
+      api_base: "https://api.xkiro.com/v1"
+      api_key: os.environ/XKIRO_API_KEY
+  - model_name: qwen-plus
+    litellm_params:
+      model: openai/qwen-plus
+      api_base: "https://api.xkiro.com/v1"
+      api_key: os.environ/XKIRO_API_KEY
+  - model_name: qwen-max
+    litellm_params:
+      model: openai/qwen-max
+      api_base: "https://api.xkiro.com/v1"
+      api_key: os.environ/XKIRO_API_KEY
+
+general_settings:
+  master_key: sk-your-secure-backend-key
