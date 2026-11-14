@@ -1,6 +1,10 @@
 <div align="center">
 
-<img src="frontend/public/logo/logo-horizontal.png" alt="ToolHub-AI Banner" width="420" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="frontend/public/logo/logo-horizontal-dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="frontend/public/logo/logo-horizontal.png">
+  <img src="frontend/public/logo/logo-horizontal.png" alt="ToolHub-AI Banner" width="480" />
+</picture>
 
 # ToolHub-AI — Multi-Model AI, Enterprise Observability & Creator SaaS Platform
 
@@ -20,9 +24,9 @@
 [![Docker Compose](https://img.shields.io/badge/Docker-6_Services-2496ed?style=for-the-badge&logo=docker)](https://www.docker.com/)
 
 [Executive Summary](#-executive-summary-for-hr--technical-leadership) •
-[System Architecture](#-system-architecture--technical-diagrams) •
-[Enterprise Observability & Governance](#-enterprise-llm-observability--governance-suite) •
-[Screenshots Gallery](#-product-showcase--visual-tour) •
+[Architecture Diagrams](#-system-architecture--technical-diagrams) •
+[Enterprise Observability](#-enterprise-llm-observability--governance-suite) •
+[Visual Showcase Gallery](#-product-showcase--visual-tour) •
 [Engineering Highlights](#-core-engineering-innovations) •
 [Machine Learning Suite](#-classical-machine-learning-engine--applied-ai) •
 [Tech Stack](#-technology-stack-matrix) •
@@ -42,7 +46,7 @@
 
 Spanning **~210,000 lines of first-party source** (≈108,000 TypeScript/TSX, ≈102,000 Python) across **181 Next.js route definitions** and **~356 backend API URL patterns**, ToolHub-AI converges four high-impact product domains into a cohesive multi-tenant platform:
 1. **A Multi-Provider AI Workspace** supporting 15 registered provider adapters, 62 seeded models (across 11 provider kinds), real-time SSE streaming, side-by-side 3-way LLM comparison, thinking mode, and smart auto-routing.
-2. **An Enterprise LLM Observability & Governance Suite** delivering granular trace telemetry, Flame/Span breakdowns, token & latency accounting, cost analysis, audit logging, server-side RBAC, and AI compliance pipelines.
+2. **An Enterprise LLM Observability & Governance Suite** delivering granular trace telemetry, flame/span breakdowns, token & latency accounting, cost analysis, audit logging, server-side RBAC, and AI compliance pipelines.
 3. **A Professional In-Browser Creative Studio** featuring a layer-based canvas (Fabric.js 7), non-destructive filter pipelines (Lena.js), inpainting alpha-masks, and generative AI (rembg U2-Net, ComfyUI, FAL).
 4. **A 62-Tool Cloud Utility Suite** covering advanced image transformations, PDF processing, developer utilities, and e-commerce product staging.
 
@@ -72,6 +76,16 @@ Every figure below is traceable directly to the codebase (see [Metric Verificati
 ToolHub-AI is built on an asynchronous, event-driven modular architecture engineered for sub-second streaming, fault-tolerant third-party integrations, and strict financial consistency.
 
 ### 1. High-Level Multi-Tier System Topology
+
+<div align="center">
+  <a href="docs/diagrams/01_system_topology.png" target="_blank">
+    <img src="docs/diagrams/01_system_topology.png" alt="ToolHub-AI High-Level System Topology" width="100%" />
+  </a>
+  <p><em>Figure 1: Full-stack system topology spanning Edge Ingress, Next.js 16 Presentation Tier, Django API Gateway, Distributed Celery/Redis Queues, ACID PostgreSQL Ledger, and External AI/Payment Ecosystem. (Click image for 4K high-res)</em></p>
+</div>
+
+<details>
+<summary><b>View Topology Mermaid Source</b></summary>
 
 ```mermaid
 flowchart TD
@@ -141,12 +155,21 @@ flowchart TD
         LedgerService <-->|Verified Webhooks| PaymentGateways
     end
 ```
+</details>
 
 ---
 
 ### 2. Multi-Provider AI Streaming & Abort Reconciliation Protocol
 
-Streaming generative responses requires handling mid-stream client disconnects and upstream provider failures gracefully without corrupting user credit balances.
+<div align="center">
+  <a href="docs/diagrams/02_ai_streaming_reconciliation.png" target="_blank">
+    <img src="docs/diagrams/02_ai_streaming_reconciliation.png" alt="AI Streaming & Abort Reconciliation Protocol" width="100%" />
+  </a>
+  <p><em>Figure 2: Resilient Server-Sent Events lifecycle with mid-stream disconnect handling, Redis idempotency locks, and token settlement. (Click image for high-res)</em></p>
+</div>
+
+<details>
+<summary><b>View Protocol Sequence Diagram Source</b></summary>
 
 ```mermaid
 sequenceDiagram
@@ -188,12 +211,21 @@ sequenceDiagram
         end
     end
 ```
+</details>
 
 ---
 
 ### 3. Credit-Safe Financial Ledger Architecture (`Reserve → Stream → Commit/Refund`)
 
-To eliminate duplicate billing and protect users against network drops, all transactions follow an idempotent two-phase settlement pattern backed by automated sweepers:
+<div align="center">
+  <a href="docs/diagrams/03_credit_safe_ledger.png" target="_blank">
+    <img src="docs/diagrams/03_credit_safe_ledger.png" alt="Credit-Safe Financial Ledger Architecture" width="70%" />
+  </a>
+  <p><em>Figure 3: Two-phase financial settlement pattern backed by Redis idempotency locks, atomic PostgreSQL transitions, and automated Celery sweepers.</em></p>
+</div>
+
+<details>
+<summary><b>View Ledger Flowchart Source</b></summary>
 
 ```mermaid
 flowchart TD
@@ -221,6 +253,18 @@ flowchart TD
     PartialRefund --> LogLedger
     LogLedger --> ReleaseLock["Release Redis Lock & Finalize"]
 ```
+</details>
+
+---
+
+### 4. Next.js 16 App Router & JWT Authentication Lifecycle
+
+<div align="center">
+  <a href="docs/diagrams/06_nextjs16_jwt_auth_lifecycle.png" target="_blank">
+    <img src="docs/diagrams/06_nextjs16_jwt_auth_lifecycle.png" alt="Next.js 16 & JWT Authentication Lifecycle" width="80%" />
+  </a>
+  <p><em>Figure 4: Defensive JWT session management featuring sliding rotation, Redis-backed blacklists, and SSR middleware guards.</em></p>
+</div>
 
 ---
 
@@ -266,7 +310,7 @@ A centralized AI powerhouse offering real-time Server-Sent Events (SSE) streamin
 
 | Light Mode Workspace | Dark Mode Workspace |
 |:---:|:---:|
-| <img src="frontend/public/Images/ai-workspace-light.jpg" alt="AI Workspace Light" width="100%"/> | <img src="frontend/public/Images/ai-workspace-dark.jpg" alt="AI Workspace Dark" width="100%"/> |
+| <a href="frontend/public/Images/ai-workspace-light.jpg"><img src="frontend/public/Images/ai-workspace-light.jpg" alt="AI Workspace Light" width="100%"/></a> | <a href="frontend/public/Images/ai-workspace-dark.jpg"><img src="frontend/public/Images/ai-workspace-dark.jpg" alt="AI Workspace Dark" width="100%"/></a> |
 
 *Features: multi-control composer, drag-and-drop file library reuse, latency tracking, auto-routing fallback, and 3-way side-by-side LLM compare.*
 
@@ -277,7 +321,7 @@ A full-featured graphic design and AI transformation canvas built on Fabric.js 7
 
 | Light Mode Canvas | Dark Mode Canvas |
 |:---:|:---:|
-| <img src="frontend/public/Images/image-editor-light.png" alt="Image Editor Light" width="100%"/> | <img src="frontend/public/Images/image-editor-dark.png" alt="Image Editor Dark" width="100%"/> |
+| <a href="frontend/public/Images/image-editor-light.png"><img src="frontend/public/Images/image-editor-light.png" alt="Image Editor Light" width="100%"/></a> | <a href="frontend/public/Images/image-editor-dark.png"><img src="frontend/public/Images/image-editor-dark.png" alt="Image Editor Dark" width="100%"/></a> |
 
 ---
 
@@ -286,7 +330,7 @@ Deep generative AI integration allowing background removal (rembg U2-Net), AI re
 
 | Generative AI Tool Rail | U2-Net Background Removal Panel |
 |:---:|:---:|
-| <img src="docs/qa/screenshots/21-editor-ai-open.jpg" alt="AI Inpainting Panel" width="100%"/> | <img src="docs/qa/screenshots/22-editor-bgremove-panel.jpg" alt="Background Removal Panel" width="100%"/> |
+| <a href="docs/qa/screenshots/21-editor-ai-open.jpg"><img src="docs/qa/screenshots/21-editor-ai-open.jpg" alt="AI Inpainting Panel" width="100%"/></a> | <a href="docs/qa/screenshots/22-editor-bgremove-panel.jpg"><img src="docs/qa/screenshots/22-editor-bgremove-panel.jpg" alt="Background Removal Panel" width="100%"/></a> |
 
 ---
 
@@ -295,7 +339,7 @@ A transparent model catalogue displaying real-time provider health, capability m
 
 | AI Model Ecosystem Directory | Smart Export & Multi-Format Presets |
 |:---:|:---:|
-| <img src="docs/qa/screenshots/08-ai-models.jpg" alt="AI Models Directory" width="100%"/> | <img src="docs/qa/screenshots/24-editor-export.jpg" alt="Export Presets" width="100%"/> |
+| <a href="docs/qa/screenshots/08-ai-models.jpg"><img src="docs/qa/screenshots/08-ai-models.jpg" alt="AI Models Directory" width="100%"/></a> | <a href="docs/qa/screenshots/24-editor-export.jpg"><img src="docs/qa/screenshots/24-editor-export.jpg" alt="Export Presets" width="100%"/></a> |
 
 ---
 
@@ -304,11 +348,24 @@ Comprehensive user cockpit monitoring credit allocation, storage consumption, Ce
 
 | Dashboard Analytics & Activity Feed | Subscriptions & Credit-Safe Billing Ledger |
 |:---:|:---:|
-| <img src="docs/qa/screenshots/05-dash.jpg" alt="Dashboard Overview" width="100%"/> | <img src="docs/qa/screenshots/07-dash-billing.jpg" alt="Billing and Credits" width="100%"/> |
+| <a href="docs/qa/screenshots/05-dash.jpg"><img src="docs/qa/screenshots/05-dash.jpg" alt="Dashboard Overview" width="100%"/></a> | <a href="docs/qa/screenshots/07-dash-billing.jpg"><img src="docs/qa/screenshots/07-dash-billing.jpg" alt="Billing and Credits" width="100%"/></a> |
 
 | Granular Credit Usage Telemetry | High-Throughput Batch Processing Engine |
 |:---:|:---:|
-| <img src="docs/qa/screenshots/06-dash-usage.jpg" alt="Usage Telemetry" width="100%"/> | <img src="docs/qa/screenshots/11-batch-processing.jpg" alt="Batch Image Processing" width="100%"/> |
+| <a href="docs/qa/screenshots/06-dash-usage.jpg"><img src="docs/qa/screenshots/06-dash-usage.jpg" alt="Usage Telemetry" width="100%"/></a> | <a href="docs/qa/screenshots/11-batch-processing.jpg"><img src="docs/qa/screenshots/11-batch-processing.jpg" alt="Batch Image Processing" width="100%"/></a> |
+
+---
+
+### 6. Authentication Security & Multi-Device Responsive UI
+Full authentication lifecycle and responsive mobile viewports optimized across desktop, tablet, and smartphone form factors.
+
+| Secure Authentication & Session Gate | Mobile Responsive Viewport (390px) |
+|:---:|:---:|
+| <a href="docs/qa/screenshots/01-login-filled.jpg"><img src="docs/qa/screenshots/01-login-filled.jpg" alt="Authentication Portal" width="100%"/></a> | <a href="docs/qa/screenshots/30-mobile390-batch.jpg"><img src="docs/qa/screenshots/30-mobile390-batch.jpg" alt="Mobile 390px Responsive Batch Processing" width="100%"/></a> |
+
+| Canvas History Stack & Timeline | Non-Destructive Layer Reversion (Undo/Redo) |
+|:---:|:---:|
+| <a href="docs/qa/screenshots/23b-editor-history.jpg"><img src="docs/qa/screenshots/23b-editor-history.jpg" alt="Canvas History Stack" width="100%"/></a> | <a href="docs/qa/screenshots/41-after-undo.jpg"><img src="docs/qa/screenshots/41-after-undo.jpg" alt="Non-Destructive Undo" width="100%"/></a> |
 
 ---
 
@@ -341,6 +398,16 @@ Comprehensive user cockpit monitoring credit allocation, storage consumption, Ce
 
 ToolHub-AI features a hybrid machine-learning architecture: a **pure-mathematical implementation** designed from first principles alongside a production-standard **`scikit-learn 1.9` backend** with backward-compatible JSON artifact support.
 
+<div align="center">
+  <a href="docs/diagrams/04_pure_python_ml_pipeline.png" target="_blank">
+    <img src="docs/diagrams/04_pure_python_ml_pipeline.png" alt="Pure Python Classical Machine Learning Pipeline" width="100%" />
+  </a>
+  <p><em>Figure 5: Classical Machine Learning feature aggregation, mathematical algorithms, and serving endpoints.</em></p>
+</div>
+
+<details>
+<summary><b>View ML Pipeline Flowchart Source</b></summary>
+
 ```mermaid
 flowchart LR
     subgraph DataIngestion["Feature Pipeline (Postgres ORM)"]
@@ -365,6 +432,7 @@ flowchart LR
         SVM --> Classification["High-Intent Prompt Classifier"]
     end
 ```
+</details>
 
 ### ML Engine Highlights:
 1. **Ridge-Stabilized Linear Regression:** Built using Gaussian elimination with L2 ridge stabilization to avoid singular matrix inversion. Powers credit burn runout forecasting.
