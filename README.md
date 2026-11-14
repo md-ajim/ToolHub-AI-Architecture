@@ -24,7 +24,7 @@
 [![Docker Compose](https://img.shields.io/badge/Docker-6_Services-2496ed?style=for-the-badge&logo=docker)](https://www.docker.com/)
 
 [Executive Summary](#-executive-summary-for-hr--technical-leadership) •
-[Architecture Diagrams](#-system-architecture--technical-diagrams) •
+[Architecture & Diagrams](#-system-architecture--technical-diagrams) •
 [Enterprise Observability](#-enterprise-llm-observability--governance-suite) •
 [Visual Showcase Gallery](#-product-showcase--visual-tour) •
 [Engineering Highlights](#-core-engineering-innovations) •
@@ -73,19 +73,9 @@ Every figure below is traceable directly to the codebase (see [Metric Verificati
 
 ## 🏗️ System Architecture & Technical Diagrams
 
-ToolHub-AI is built on an asynchronous, event-driven modular architecture engineered for sub-second streaming, fault-tolerant third-party integrations, and strict financial consistency.
+ToolHub-AI is built on an asynchronous, event-driven modular architecture engineered for sub-second streaming, fault-tolerant third-party integrations, and strict financial consistency. Below are the complete architectural source definitions.
 
 ### 1. High-Level Multi-Tier System Topology
-
-<div align="center">
-  <a href="docs/diagrams/01_system_topology.png" target="_blank">
-    <img src="docs/diagrams/01_system_topology.png" alt="ToolHub-AI High-Level System Topology" width="100%" />
-  </a>
-  <p><em>Figure 1: Full-stack system topology spanning Edge Ingress, Next.js 16 Presentation Tier, Django API Gateway, Distributed Celery/Redis Queues, ACID PostgreSQL Ledger, and External AI/Payment Ecosystem. (Click image for 4K high-res)</em></p>
-</div>
-
-<details>
-<summary><b>View Topology Mermaid Source</b></summary>
 
 ```mermaid
 flowchart TD
@@ -155,21 +145,12 @@ flowchart TD
         LedgerService <-->|Verified Webhooks| PaymentGateways
     end
 ```
-</details>
 
 ---
 
 ### 2. Multi-Provider AI Streaming & Abort Reconciliation Protocol
 
-<div align="center">
-  <a href="docs/diagrams/02_ai_streaming_reconciliation.png" target="_blank">
-    <img src="docs/diagrams/02_ai_streaming_reconciliation.png" alt="AI Streaming & Abort Reconciliation Protocol" width="100%" />
-  </a>
-  <p><em>Figure 2: Resilient Server-Sent Events lifecycle with mid-stream disconnect handling, Redis idempotency locks, and token settlement. (Click image for high-res)</em></p>
-</div>
-
-<details>
-<summary><b>View Protocol Sequence Diagram Source</b></summary>
+Handling generative AI streams requires handling mid-stream client disconnects and upstream provider failures gracefully without corrupting user credit balances.
 
 ```mermaid
 sequenceDiagram
@@ -211,21 +192,12 @@ sequenceDiagram
         end
     end
 ```
-</details>
 
 ---
 
 ### 3. Credit-Safe Financial Ledger Architecture (`Reserve → Stream → Commit/Refund`)
 
-<div align="center">
-  <a href="docs/diagrams/03_credit_safe_ledger.png" target="_blank">
-    <img src="docs/diagrams/03_credit_safe_ledger.png" alt="Credit-Safe Financial Ledger Architecture" width="70%" />
-  </a>
-  <p><em>Figure 3: Two-phase financial settlement pattern backed by Redis idempotency locks, atomic PostgreSQL transitions, and automated Celery sweepers.</em></p>
-</div>
-
-<details>
-<summary><b>View Ledger Flowchart Source</b></summary>
+To eliminate duplicate billing and protect users against network drops, all transactions follow an idempotent two-phase settlement pattern backed by automated Celery sweepers:
 
 ```mermaid
 flowchart TD
@@ -253,18 +225,49 @@ flowchart TD
     PartialRefund --> LogLedger
     LogLedger --> ReleaseLock["Release Redis Lock & Finalize"]
 ```
-</details>
 
 ---
 
 ### 4. Next.js 16 App Router & JWT Authentication Lifecycle
 
-<div align="center">
-  <a href="docs/diagrams/06_nextjs16_jwt_auth_lifecycle.png" target="_blank">
-    <img src="docs/diagrams/06_nextjs16_jwt_auth_lifecycle.png" alt="Next.js 16 & JWT Authentication Lifecycle" width="80%" />
-  </a>
-  <p><em>Figure 4: Defensive JWT session management featuring sliding rotation, Redis-backed blacklists, and SSR middleware guards.</em></p>
-</div>
+```mermaid
+sequenceDiagram
+    autonumber
+    actor User as Browser / User
+    participant Client as React Client (State / Fetch)
+    participant MW as Next.js 16 Proxy / Middleware
+    participant Server as Next.js Server (RSC)
+    participant Backend as Django REST Auth Gateway
+    participant Redis as Redis Cache & Blacklist
+
+    %% 1. LOGIN
+    Note over User,Redis: 1. Authentication & Cookie Issuance
+    User->>Client: Submit credentials (Email / Password / OAuth)
+    Client->>Backend: POST /api/v1/auth/login/
+    Backend-->>Client: 200 OK + {access, refresh, user}
+    Client->>Client: Set secure, HttpOnly, SameSite cookies
+
+    %% 2. ROUTE GUARDING
+    Note over User,Redis: 2. SSR Route Guarding & Middleware
+    User->>MW: Request protected route (/dashboard, /ai)
+    alt Missing or Expired Token
+        MW-->>User: 307 Redirect to /login?next=/dashboard
+    else Valid Access Token
+        MW->>Server: Forward request to Server Component
+    end
+
+    %% 3. SERVER COMPONENT DATA FETCHING
+    Note over User,Redis: 3. React Server Component (RSC) Fetch
+    Server->>Backend: GET /api/v1/accounts/profile/ (Bearer Access Token)
+    Backend-->>Server: 200 OK + User Profile & Wallet
+    Server-->>User: Stream HTML & RSC Payload
+
+    %% 4. TOKEN ROTATION
+    Note over User,Redis: 4. Token Rotation & Blacklisting
+    Client->>Backend: POST /api/v1/auth/token/refresh/ (Refresh Token)
+    Backend->>Redis: Check Blacklist & Revoke Old Refresh Token
+    Backend-->>Client: 200 OK + New Rotated Token Pair
+```
 
 ---
 
@@ -398,16 +401,6 @@ Full authentication lifecycle and responsive mobile viewports optimized across d
 
 ToolHub-AI features a hybrid machine-learning architecture: a **pure-mathematical implementation** designed from first principles alongside a production-standard **`scikit-learn 1.9` backend** with backward-compatible JSON artifact support.
 
-<div align="center">
-  <a href="docs/diagrams/04_pure_python_ml_pipeline.png" target="_blank">
-    <img src="docs/diagrams/04_pure_python_ml_pipeline.png" alt="Pure Python Classical Machine Learning Pipeline" width="100%" />
-  </a>
-  <p><em>Figure 5: Classical Machine Learning feature aggregation, mathematical algorithms, and serving endpoints.</em></p>
-</div>
-
-<details>
-<summary><b>View ML Pipeline Flowchart Source</b></summary>
-
 ```mermaid
 flowchart LR
     subgraph DataIngestion["Feature Pipeline (Postgres ORM)"]
@@ -432,7 +425,6 @@ flowchart LR
         SVM --> Classification["High-Intent Prompt Classifier"]
     end
 ```
-</details>
 
 ### ML Engine Highlights:
 1. **Ridge-Stabilized Linear Regression:** Built using Gaussian elimination with L2 ridge stabilization to avoid singular matrix inversion. Powers credit burn runout forecasting.
