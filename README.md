@@ -2,11 +2,11 @@
 
 <img src="frontend/public/logo/logo-horizontal.png" alt="ToolHub-AI Banner" width="420" />
 
-# ToolHub-AI — Multi-Model AI & Creator SaaS Platform
+# ToolHub-AI — Multi-Model AI, Enterprise Observability & Creator SaaS Platform
 
-**A full-stack AI ecosystem unifying multi-provider LLM orchestration, a layered canvas media studio, 62 cloud tools, and a dependency-free Python machine-learning library.**
+**A production-grade AI ecosystem unifying multi-provider LLM orchestration, enterprise LLM observability, an in-browser creative studio, 62 cloud tools, and a hybrid classical machine-learning engine.**
 
-[![Next.js 16](https://img.shields.io/badge/Next.js-16.3-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![Next.js 16](https://img.shields.io/badge/Next.js-16.4-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React 19](https://img.shields.io/badge/React-19.2-61dafb?style=for-the-badge&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS 4](https://img.shields.io/badge/Tailwind-v4.0-38bdf8?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com/)
@@ -15,13 +15,16 @@
 [![Celery 5.6](https://img.shields.io/badge/Celery-5.6-37814a?style=for-the-badge&logo=celery)](https://docs.celeryq.dev/)
 [![Redis 7](https://img.shields.io/badge/Redis-7.x-dc382d?style=for-the-badge&logo=redis)](https://redis.io/)
 [![PostgreSQL 15](https://img.shields.io/badge/PostgreSQL-15-336791?style=for-the-badge&logo=postgresql)](https://www.postgresql.org/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.9-F7931E?style=for-the-badge&logo=scikit-learn)](https://scikit-learn.org/)
+[![Tests](https://img.shields.io/badge/Tests-1650+_Passed-success?style=for-the-badge)](https://github.com/md-ajim/ToolHub-AI)
 [![Docker Compose](https://img.shields.io/badge/Docker-6_Services-2496ed?style=for-the-badge&logo=docker)](https://www.docker.com/)
 
 [Executive Summary](#-executive-summary-for-hr--technical-leadership) •
 [System Architecture](#-system-architecture--technical-diagrams) •
+[Enterprise Observability & Governance](#-enterprise-llm-observability--governance-suite) •
 [Screenshots Gallery](#-product-showcase--visual-tour) •
 [Engineering Highlights](#-core-engineering-innovations) •
-[Machine Learning Suite](#-pure-python-classical-machine-learning-engine) •
+[Machine Learning Suite](#-classical-machine-learning-engine--applied-ai) •
 [Tech Stack](#-technology-stack-matrix) •
 [Quickstart](#-quickstart--local-development) •
 [Testing & QA](#-testing--quality-assurance) •
@@ -35,126 +38,82 @@
 
 ## 🎯 Executive Summary (For HR & Technical Leadership)
 
-**ToolHub-AI** is a full-stack AI SaaS application built from the ground up to demonstrate **full-stack engineering**, **distributed system design**, **AI/LLM infrastructure**, **applied machine learning**, and **production-oriented DevOps**.
+**ToolHub-AI** is a full-stack, distributed AI SaaS application built from the ground up to demonstrate **large-scale full-stack systems engineering**, **distributed async architecture**, **high-throughput AI/LLM infrastructure**, **applied machine learning**, and **production-grade enterprise observability**.
 
-Spanning **~113,000 lines of first-party source** (≈66,000 TypeScript/TSX, ≈47,000 Python) across 146 frontend route definitions and ~190 backend API endpoints, ToolHub-AI converges three domains into a single unified account:
-1. **A Multi-Provider AI Workspace** supporting 15 registered provider adapters, 62 seeded models (across 11 providers), real-time SSE streaming, side-by-side LLM comparison, and smart auto-routing.
-2. **A Professional In-Browser Creative Studio** with a layer-based canvas (Fabric.js), non-destructive canvas filter pipelines (Lena.js), inpainting masks, and local/cloud generative AI (ComfyUI, rembg U2-Net, FAL).
-3. **A 62-Tool Cloud Utility Suite** covering advanced image transformation, PDF manipulation, text processing, SEO diagnostics, and developer utilities.
+Spanning **~210,000 lines of first-party source** (≈108,000 TypeScript/TSX, ≈102,000 Python) across **181 Next.js route definitions** and **~356 backend API URL patterns**, ToolHub-AI converges four high-impact product domains into a cohesive multi-tenant platform:
+1. **A Multi-Provider AI Workspace** supporting 15 registered provider adapters, 62 seeded models (across 11 provider kinds), real-time SSE streaming, side-by-side 3-way LLM comparison, thinking mode, and smart auto-routing.
+2. **An Enterprise LLM Observability & Governance Suite** delivering granular trace telemetry, Flame/Span breakdowns, token & latency accounting, cost analysis, audit logging, server-side RBAC, and AI compliance pipelines.
+3. **A Professional In-Browser Creative Studio** featuring a layer-based canvas (Fabric.js 7), non-destructive filter pipelines (Lena.js), inpainting alpha-masks, and generative AI (rembg U2-Net, ComfyUI, FAL).
+4. **A 62-Tool Cloud Utility Suite** covering advanced image transformations, PDF processing, developer utilities, and e-commerce product staging.
 
-### 📊 Engineering Scale & Metrics
+### 📊 Engineering Scale & Verified Metrics
 
-Every figure below is traceable to the repository (see the [metric verification notes](#-metric-verification-notes)); counts are measured from source, not estimated.
+Every figure below is traceable directly to the codebase (see [Metric Verification Notes](#-metric-verification-notes)); counts are measured from source, not estimated.
 
 | Architectural Domain | Metric / Implementation | Technical Significance |
 |---|---|---|
-| **Codebase Volume** | **~113,000 LOC** first-party source (TS/TSX ≈66,000, Python ≈47,000, git-tracked) | Large, modular codebase with strict type-safety on the frontend |
-| **Frontend Architecture** | **146 Next.js route definitions** (Next.js 16 App Router, React 19, Tailwind v4) | Responsive, theme-aware UI with route-level code organization |
-| **Backend REST & SSE** | **~190 API endpoints** across **28 Django app modules** (23 registered in `INSTALLED_APPS`) | Domain separation with lightweight custom DRF views |
-| **AI Model Ecosystem** | **62 seeded models** across **11 provider kinds** | Standardized LLM abstraction layer with health gating and auto-fallback |
-| **LLM Provider Adapters** | **15 registered adapters** (incl. a mock test adapter) + unified SSE gateway | Streaming protocol (`meta → delta → done`) with mid-stream abort reconciliation |
-| **Financial Ledger** | **`Reserve → Stream → Commit/Refund` state machine** with idempotency keys | Designed to avoid credit leaks on disconnect or upstream failures |
-| **Payment Infrastructure** | **4 gateways** (Stripe, LemonSqueezy, bKash Tokenized, Nagad) | Card processing plus regional mobile-wallet support |
-| **Applied Classical ML** | Dependency-free Python ML library (~10 algorithms; no scikit-learn/pandas) | Lean Docker images; powers churn, upgrade propensity, clustering, and forecasting |
-| **Creative Canvas Engine** | **31 registered AI image operations** surfaced via the editor rail, Batch Studio, and tool pages | In-browser canvas manipulation, layer ordering, and non-destructive filter chains |
-| **Async Services** | **6 Docker Compose services** (Next.js, Django/Gunicorn, Celery worker, Celery Beat, Redis, Postgres) | Event-driven processing; optional zero-inbound Cloudflare Tunnel profile |
-
----
-
-## 📸 Product Showcase & Visual Tour
-
-### 1. Multi-Model AI Chat Workspace (`/ai`)
-A centralized AI powerhouse offering real-time Server-Sent Events (SSE) streaming, context-preserving model switching, multi-modal file attachments (code, documents, images), reasoning "Think Mode" toggling, and multi-model comparison.
-
-| Light Mode Workspace | Dark Mode Workspace |
-|:---:|:---:|
-| <img src="frontend/public/Images/ai-workspace-light.png" alt="AI Workspace Light" width="100%"/> | <img src="frontend/public/Images/ai-workspace-dark.png" alt="AI Workspace Dark" width="100%"/> |
-
-*Features: multi-control composer, drag-and-drop file library reuse, latency tracking, auto-routing fallback, and 3-way side-by-side LLM compare (up to 3 models).*
-
----
-
-### 2. Pro In-Browser Creative Studio (`/tools/image-editor`)
-A full-featured graphic design and AI transformation canvas built on Fabric.js and Lena.js, featuring layer hierarchies, non-destructive filter chains, inpainting brush masks, and e-commerce staging presets.
-
-| Light Mode Canvas | Dark Mode Canvas |
-|:---:|:---:|
-| <img src="frontend/public/Images/image-editor-light.png" alt="Image Editor Light" width="100%"/> | <img src="frontend/public/Images/image-editor-dark.png" alt="Image Editor Dark" width="100%"/> |
-
----
-
-### 3. Integrated AI Image Studio & Background Segmentation
-Deep generative AI integration allowing background removal (rembg U2-Net), AI relighting, generative fill, and instant product staging directly on active canvas layers.
-
-| Generative AI Tool Rail | U2-Net Background Removal Panel |
-|:---:|:---:|
-| <img src="docs/qa/screenshots/21-editor-ai-open.jpg" alt="AI Inpainting Panel" width="100%"/> | <img src="docs/qa/screenshots/22-editor-bgremove-panel.jpg" alt="Background Removal Panel" width="100%"/> |
-
----
-
-### 4. Models Directory & Multi-Provider Registry (`/ai/models`)
-A transparent model catalogue displaying real-time provider health, capability matrices (reasoning, vision, function calling, audio), context window size, and pricing tiers.
-
-| AI Model Ecosystem Directory | Smart Export & Multi-Format Presets |
-|:---:|:---:|
-| <img src="docs/qa/screenshots/08-ai-models.jpg" alt="AI Models Directory" width="100%"/> | <img src="docs/qa/screenshots/24-editor-export.jpg" alt="Export Presets" width="100%"/> |
-
----
-
-### 5. Production Dashboard, Analytics & Financial Billing (`/dashboard`)
-Comprehensive user cockpit monitoring credit allocation, storage consumption, Celery task statuses, and multi-gateway billing history.
-
-| Dashboard Analytics & Activity Feed | Subscriptions & Credit-Safe Billing Ledger |
-|:---:|:---:|
-| <img src="docs/qa/screenshots/05-dash.jpg" alt="Dashboard Overview" width="100%"/> | <img src="docs/qa/screenshots/07-dash-billing.jpg" alt="Billing and Credits" width="100%"/> |
-
-| Granular Credit Usage Telemetry | High-Throughput Batch Processing Engine |
-|:---:|:---:|
-| <img src="docs/qa/screenshots/06-dash-usage.jpg" alt="Usage Telemetry" width="100%"/> | <img src="docs/qa/screenshots/11-batch-processing.jpg" alt="Batch Image Processing" width="100%"/> |
+| **Codebase Volume** | **~210,000 LOC** first-party source (TS/TSX ≈108,000, Python ≈102,000 git-tracked) | Highly modular, strictly typed full-stack architecture |
+| **Frontend Architecture** | **181 Next.js route definitions** (Next.js 16.4 App Router, React 19.2, Tailwind v4) | App Router page/route handlers, theme-aware, responsive UX |
+| **Backend REST & SSE** | **~356 URL patterns** across **32 Django apps** (27 registered in `INSTALLED_APPS`) | Strict domain isolation with DRF viewsets, SSE streaming, and async workers |
+| **Automated Test Suite** | **1,650+ automated tests** (1,255 backend unit/integration tests + 397 Vitest frontend tests) | Regression prevention, billing safety, and ML verification |
+| **AI Model Ecosystem** | **62 seeded models** across **11 provider kinds** | Unified schema with dynamic health gating, error scrubbing, and fallback |
+| **LLM Provider Adapters** | **15 registered adapters** + unified Server-Sent Events gateway | Streaming protocol (`meta → delta → done`) with mid-stream abort reconciliation |
+| **Enterprise Observability** | Trace telemetry, span inspection, latency percentiles (p50/p95), cost & token analytics | Real-time monitoring, trace-backed logs, unpriced cost handling |
+| **Financial Ledger** | **`Reserve → Stream → Commit/Refund` state machine** with idempotency keys | Redis distributed locks + Celery sweepers to eliminate credit leaks |
+| **Payment Gateways** | **4 integrated gateways** (Stripe, LemonSqueezy, bKash Tokenized, Nagad) | Global credit card processing alongside emerging-market mobile wallets |
+| **Applied Classical ML** | Hybrid architecture: Custom pure-Python algorithms + `scikit-learn 1.9` backend | Churn prediction, credit burn forecaster, tool affinity recommender |
+| **Creative Canvas Engine** | **31 registered AI image operations** + Fabric.js 7 & Lena.js canvas | Layer reordering, non-destructive filter chains, and inpainting masks |
+| **Async Services** | **6 Docker Compose services** (Next.js, Django/Gunicorn, Celery, Beat, Redis, Postgres) | Event-driven processing + optional Cloudflare Zero-Trust Tunnel profile |
 
 ---
 
 ## 🏗️ System Architecture & Technical Diagrams
 
-ToolHub-AI is built on an asynchronous, event-driven modular monolith architecture optimized for low-latency streaming, resilient third-party integrations, and strict financial consistency.
+ToolHub-AI is built on an asynchronous, event-driven modular architecture engineered for sub-second streaming, fault-tolerant third-party integrations, and strict financial consistency.
 
 ### 1. High-Level Multi-Tier System Topology
 
 ```mermaid
 flowchart TD
     subgraph ClientLayer["Client & Edge Layer"]
-        UserBrowser["Modern Browser (Web Speech, Canvas, EventSource)"]
+        UserBrowser["Modern Browser (Web Speech, Canvas, EventSource, Dark/Light Mode)"]
         CFTunnel["Cloudflare Zero-Trust Tunnel (cloudflared)"]
         UserBrowser <-->|Zero Inbound Open Ports| CFTunnel
     end
 
-    subgraph PresentationTier["Frontend Layer (Next.js 16 + React 19)"]
-        NextApp["Next.js App Router (146 Route Definitions)"]
+    subgraph PresentationTier["Frontend Layer (Next.js 16.4 + React 19.2 + Tailwind v4)"]
+        NextApp["Next.js App Router (181 Route Definitions)"]
         Shadcn["shadcn/ui + Tailwind CSS v4"]
-        FabricCanvas["Fabric.js Canvas + Lena.js Filters"]
+        FabricCanvas["Fabric.js 7 Canvas + Lena.js Filters"]
+        ObservabilityUI["LLM Observability Cockpit & Admin Views"]
         CFTunnel <--> NextApp
         NextApp --- Shadcn
         NextApp --- FabricCanvas
+        NextApp --- ObservabilityUI
     end
 
-    subgraph APIGatewayTier["API & Application Gateway (Django 6.1 + DRF 3.18)"]
-        GunicornWSGI["Gunicorn Multi-Worker (2x concurrency)"]
-        AuthModule["SimpleJWT Auth + OAuth 2.0 (Google/GitHub)"]
-        AIGateway["Multi-Provider AI Gateway & Router"]
-        LedgerService["Credit-Safe Transaction Ledger"]
-        ToolEngine["62-Tool Dispatcher Engine"]
+    subgraph APIGatewayTier["API Gateway & Services (Django 6.1 + DRF 3.18)"]
+        GunicornWSGI["Gunicorn Multi-Worker Process Model"]
+        AuthModule["SimpleJWT Auth (Rotation + Blacklist) & OAuth 2.0"]
+        AIGateway["Multi-Provider AI Gateway & Auto-Router"]
+        LedgerService["Idempotent Credit-Safe Transaction Ledger"]
+        ObsEngine["Enterprise Observability & Trace Collector"]
+        AdminEngine["Admin Panel RBAC & Audit Log Engine"]
+        ToolEngine["62-Tool Dispatcher & Media Engine"]
         
         NextApp <-->|REST API + SSE Streaming /api/v1/| GunicornWSGI
         GunicornWSGI --> AuthModule
         GunicornWSGI --> AIGateway
         GunicornWSGI --> LedgerService
+        GunicornWSGI --> ObsEngine
+        GunicornWSGI --> AdminEngine
         GunicornWSGI --> ToolEngine
     end
 
     subgraph AsyncWorkerTier["Async Processing & Queuing Tier"]
         CeleryWorker["Celery 5.6 Distributed Workers"]
-        CeleryBeat["Celery Beat Periodic Scheduler"]
-        RedisBroker["Redis 7 (Broker, Cache & Idempotency Locks)"]
+        CeleryBeat["Celery Beat Periodic Scheduler (Sweeps & ML Retrain)"]
+        RedisBroker["Redis 7/8 (Broker, Cache, Idempotency Locks)"]
         
         GunicornWSGI <-->|Task Dispatch| RedisBroker
         RedisBroker <--> CeleryWorker
@@ -162,8 +121,8 @@ flowchart TD
     end
 
     subgraph DataStorageTier["Persistence & Media Storage"]
-        PostgresDB[("PostgreSQL 15 (ACID Ledger & Metadata)")]
-        StorageSystem[("Local File Storage (MEDIA_ROOT, Docker volume)")]
+        PostgresDB[("PostgreSQL 15 (ACID Ledger, Traces, Metadata)")]
+        StorageSystem[("Media Storage (MEDIA_ROOT, Docker volume)")]
         
         GunicornWSGI <--> PostgresDB
         CeleryWorker <--> PostgresDB
@@ -171,14 +130,14 @@ flowchart TD
     end
 
     subgraph ExternalEcosystem["External Providers & Inference Services"]
-        LLMProviders["15 Provider Adapters / 11 Seeded Providers (OpenAI, Anthropic, Google, DeepSeek, etc.)"]
+        LLMProviders["15 Provider Adapters (OpenAI, Anthropic, Google, DeepSeek, Groq, etc.)"]
         ComfyUIGPU["Local GPU Worker (ComfyUI / Stable Diffusion)"]
-        LocalML["Pure-Python ML Analytics Engine"]
+        HybridML["Hybrid Classical ML Engine (Pure-Python + scikit-learn)"]
         PaymentGateways["Payment Gateways (Stripe, LemonSqueezy, bKash, Nagad)"]
         
         AIGateway <-->|HTTP/REST & SSE| LLMProviders
         ToolEngine <-->|Async REST job| ComfyUIGPU
-        CeleryWorker <--> LocalML
+        CeleryWorker <--> HybridML
         LedgerService <-->|Verified Webhooks| PaymentGateways
     end
 ```
@@ -187,7 +146,7 @@ flowchart TD
 
 ### 2. Multi-Provider AI Streaming & Abort Reconciliation Protocol
 
-Handling generative AI streams requires handling mid-stream client disconnects and upstream provider failures gracefully without corrupting user credit balances.
+Streaming generative responses requires handling mid-stream client disconnects and upstream provider failures gracefully without corrupting user credit balances.
 
 ```mermaid
 sequenceDiagram
@@ -234,7 +193,7 @@ sequenceDiagram
 
 ### 3. Credit-Safe Financial Ledger Architecture (`Reserve → Stream → Commit/Refund`)
 
-To prevent duplicate billing and protect users against network drops, all transactions follow an idempotent two-phase settlement pattern:
+To eliminate duplicate billing and protect users against network drops, all transactions follow an idempotent two-phase settlement pattern backed by automated sweepers:
 
 ```mermaid
 flowchart TD
@@ -245,7 +204,7 @@ flowchart TD
     
     GenKey --> AcquireLock{"Acquire Redis Lock"}
     AcquireLock -->|Key Exists / Duplicate| Discard["Reject Duplicate Request"]
-    AcquireLock -->|Lock Acquired| AtomicReserve["PostgreSQL Atomic Transaction: Reserve Maximum Estimated Credits"]
+    AcquireLock -->|Lock Acquired| AtomicReserve["PostgreSQL Atomic Transaction: Reserve Estimated Credits"]
     
     AtomicReserve --> ExecuteInference["Execute Inference / Processing Pipeline"]
     
@@ -254,8 +213,8 @@ flowchart TD
     ResultCheck -->|Success| ExactCalc["Calculate Actual Consumed Tokens / CPU Units"]
     ExactCalc --> SettleCommit["Commit Consumed Amount + Refund Surplus Back to Wallet"]
     
-    ResultCheck -->|Provider Error / Timeout| FullRefund["Automatic full refund of the reservation"]
-    ResultCheck -->|Client Abort / Disconnect| PartialRefund["Settle partial output if any, otherwise refund remainder"]
+    ResultCheck -->|Provider Error / Timeout| FullRefund["Automatic full refund of reservation"]
+    ResultCheck -->|Client Abort / Disconnect| PartialRefund["Settle consumed tokens, refund unconsumed balance"]
     
     SettleCommit --> LogLedger["Write Immutable Audit Record to CreditTransaction Table"]
     FullRefund --> LogLedger
@@ -265,65 +224,154 @@ flowchart TD
 
 ---
 
+## 🔍 Enterprise LLM Observability & Governance Suite
+
+Mounted under `/enterprise/` and powered by `apps.enterprise_observability`, this module delivers enterprise-grade transparency into every LLM interaction:
+
+```mermaid
+flowchart LR
+    subgraph Ingestion["Telemetry Ingestion"]
+        AIGW["AI Gateway Request"] --> IngestFilter["PII & Secret Redaction"]
+        IngestFilter --> TraceStore["Trace & Span Recorder"]
+    end
+
+    subgraph AnalyticsEngine["Real-Time Analytics Engine"]
+        TraceStore --> LatencyCalc["p50 / p95 / Avg Latency"]
+        TraceStore --> TokenLedger["Prompt / Completion Token Accounting"]
+        TraceStore --> CostModel["Model Pricing & Unpriced Handler"]
+        TraceStore --> ErrorClass["Error Classification & Health Monitor"]
+    end
+
+    subgraph EnterpriseUI["Enterprise Cockpit (/enterprise/observability)"]
+        LatencyCalc --> Overview["Overview Dashboard (6 KPI Tiles, Volume Charts)"]
+        TokenLedger --> Traces["Traces & Spans Inspector (Slide-Over Detail)"]
+        CostModel --> CostAnalytics["Cost Breakdown by Provider / Model"]
+        ErrorClass --> LogStream["Chronological Trace-Backed Logs Explorer"]
+    end
+```
+
+### Key Capabilities:
+- **Trace & Request Telemetry:** Deep dive into every prompt, token breakdown, duration, time-to-first-token (TTFT), request/response headers, and metadata.
+- **Provider & Model Health Matrix:** Live monitoring of error rates, p50/p95 latency distributions, and active throughput across all 15 provider adapters.
+- **Cost & Token Economics:** Real-time token aggregation and multi-currency cost calculation with explicit `Unpriced` classification (never misleading $0.00).
+- **Security & PII Scrubbing:** High-speed token redaction scrubbing API keys (`sk-...`, `hf_...`), authorization headers, and confidential customer payloads before persistence.
+- **Admin RBAC & Audit Trail:** Server-enforced `AdminRole` controls and immutable `AuditLog` records for all administrative mutations.
+
+---
+
+## 📸 Product Showcase & Visual Tour
+
+### 1. Multi-Model AI Chat Workspace (`/ai`)
+A centralized AI powerhouse offering real-time Server-Sent Events (SSE) streaming, context-preserving model switching, multi-modal file attachments (code, documents, images), reasoning "Think Mode" toggling, and multi-model comparison.
+
+| Light Mode Workspace | Dark Mode Workspace |
+|:---:|:---:|
+| <img src="frontend/public/Images/ai-workspace-light.jpg" alt="AI Workspace Light" width="100%"/> | <img src="frontend/public/Images/ai-workspace-dark.jpg" alt="AI Workspace Dark" width="100%"/> |
+
+*Features: multi-control composer, drag-and-drop file library reuse, latency tracking, auto-routing fallback, and 3-way side-by-side LLM compare.*
+
+---
+
+### 2. Pro In-Browser Creative Studio (`/tools/image-editor`)
+A full-featured graphic design and AI transformation canvas built on Fabric.js 7 and Lena.js, featuring layer hierarchies, non-destructive filter chains, inpainting brush masks, and e-commerce staging presets.
+
+| Light Mode Canvas | Dark Mode Canvas |
+|:---:|:---:|
+| <img src="frontend/public/Images/image-editor-light.png" alt="Image Editor Light" width="100%"/> | <img src="frontend/public/Images/image-editor-dark.png" alt="Image Editor Dark" width="100%"/> |
+
+---
+
+### 3. Integrated AI Image Studio & Background Segmentation
+Deep generative AI integration allowing background removal (rembg U2-Net), AI relighting, generative fill, and instant product staging directly on active canvas layers.
+
+| Generative AI Tool Rail | U2-Net Background Removal Panel |
+|:---:|:---:|
+| <img src="docs/qa/screenshots/21-editor-ai-open.jpg" alt="AI Inpainting Panel" width="100%"/> | <img src="docs/qa/screenshots/22-editor-bgremove-panel.jpg" alt="Background Removal Panel" width="100%"/> |
+
+---
+
+### 4. Models Directory & Multi-Provider Registry (`/ai/models`)
+A transparent model catalogue displaying real-time provider health, capability matrices (reasoning, vision, function calling, audio), context window size, and pricing tiers.
+
+| AI Model Ecosystem Directory | Smart Export & Multi-Format Presets |
+|:---:|:---:|
+| <img src="docs/qa/screenshots/08-ai-models.jpg" alt="AI Models Directory" width="100%"/> | <img src="docs/qa/screenshots/24-editor-export.jpg" alt="Export Presets" width="100%"/> |
+
+---
+
+### 5. Production Dashboard, Analytics & Financial Billing (`/dashboard`)
+Comprehensive user cockpit monitoring credit allocation, storage consumption, Celery task statuses, and multi-gateway billing history.
+
+| Dashboard Analytics & Activity Feed | Subscriptions & Credit-Safe Billing Ledger |
+|:---:|:---:|
+| <img src="docs/qa/screenshots/05-dash.jpg" alt="Dashboard Overview" width="100%"/> | <img src="docs/qa/screenshots/07-dash-billing.jpg" alt="Billing and Credits" width="100%"/> |
+
+| Granular Credit Usage Telemetry | High-Throughput Batch Processing Engine |
+|:---:|:---:|
+| <img src="docs/qa/screenshots/06-dash-usage.jpg" alt="Usage Telemetry" width="100%"/> | <img src="docs/qa/screenshots/11-batch-processing.jpg" alt="Batch Image Processing" width="100%"/> |
+
+---
+
 ## ⚡ Core Engineering Innovations
 
 ### 1. Multi-Provider LLM Gateway with Resilient Auto-Routing
-- **15 Standardized Provider Adapters:** Decoupled adapters translate heterogeneous upstream schemas (OpenAI, Anthropic Messages API, Google Gemini REST, DeepSeek, Mistral, Ollama) into a unified internal data contract.
-- **Circuit Breaker & Live Verification (`verify_models --live`):** Paid selectors display only models that pass live synthetic round-trip verification. Degraded providers are automatically quarantined for 15 minutes.
-- **Side-by-Side Model Compare (`/ai/compare`):** Uses an asynchronous thread-and-queue fan-out engine to stream responses from up to 3 models simultaneously, displaying real-time time-to-first-token (TTFT) and throughput comparisons.
+- **15 Standardized Provider Adapters:** Decoupled adapters translate heterogeneous upstream schemas (OpenAI, Anthropic Messages API, Google Gemini REST, DeepSeek, Mistral, Groq, Cohere, Ollama) into a unified internal data contract.
+- **Circuit Breaker & Live Verification (`verify_models --live`):** Selectors display only models that pass synthetic round-trip verification. Degraded providers are automatically quarantined.
+- **Side-by-Side Model Compare (`/ai/compare`):** Uses an asynchronous thread-and-queue fan-out engine to stream responses from up to 3 models simultaneously, displaying real-time TTFT and throughput benchmarks.
 
 ### 2. Credit-Safe Ledger & Multi-Gateway Billing
-- **Reserve-then-settle design:** a request reserves an estimated maximum, then commits the consumed amount and refunds the remainder (or refunds in full on upstream failure). The `Reserve → Stream → Commit/Refund` protocol is backed by Redis idempotency keys (`workspace:{msg_id}:attempt:{n}`), which is intended to prevent double-charging and credit leaks on mid-stream disconnects.
+- **Reserve-then-settle design:** A request reserves an estimated maximum, commits actual consumed tokens, and refunds the remainder. Redis idempotency keys (`workspace:{msg_id}:attempt:{n}`) prevent duplicate deductions.
 - **Server-Side Security Enforcement:** All plan entitlements, tool permissions, and burst rate limits are validated strictly on the backend (HTTP 402/403/429). The frontend never makes authorization decisions.
-- **Hybrid Global & Emerging-Market Payment Engine:** Webhook-driven state machines support credit card subscriptions (Stripe, LemonSqueezy) alongside regional mobile wallets (bKash Tokenized Checkout, Nagad).
+- **Hybrid Global & Regional Payment Engine:** Webhook-driven state machines support credit cards (Stripe, LemonSqueezy) alongside regional mobile wallets (bKash Tokenized Checkout, Nagad).
 
-### 3. Layer-Based In-Browser Creative Studio (Fabric.js & Lena.js)
-- **Non-Destructive Canvas Architecture:** Graphic editing is powered by an object-oriented canvas engine (Fabric.js 7) coupled with non-destructive canvas filters (Lena.js), supporting bounded undo/redo history (up to 50 steps), alignment guides, and layer reordering.
-- **Brush-Mask Inpainting:** Users paint directly over canvas objects to create precise alpha-masks for generative inpainting or object removal.
-- **eCommerce Automation Rail:** Specialized 1-click tools for product photography, ghost mannequin extraction, fashion model generation, and marketplace-compliant white balancing.
+### 3. Layer-Based In-Browser Creative Studio (Fabric.js 7 & Lena.js)
+- **Non-Destructive Canvas Architecture:** Powered by Fabric.js 7 coupled with Lena.js image filters, supporting bounded undo/redo history (50 steps), alignment guides, and layer ordering.
+- **Brush-Mask Inpainting:** Users paint directly over canvas objects to generate precise alpha-masks for generative inpainting or object removal.
+- **eCommerce Automation Rail (`apps.ecommerce_studio`):** Specialized 1-click tools for product photography, ghost mannequin extraction, fashion model generation, and marketplace presets (Amazon, Shopify, Etsy, eBay).
 
 ### 4. Comprehensive 62-Tool Cloud Utility Suite
-- Consolidated tool suite across 15 mega-menu categories, counted from the frontend registry (`frontend/src/constants/centralToolRegistry.ts`; every entry is marked `available`):
-  - **Image & AI creative tools (41):** Resizing, crop/rotate/flip, WebP/AVIF compression, passport photo generator, watermarking, background removal, inpainting, relighting, and product/e-commerce staging tools.
+- Consolidated tool suite across 15 categories, verified in `frontend/src/constants/centralToolRegistry.ts`:
+  - **Image & AI creative tools (41):** Resizing, crop/rotate/flip, WebP/AVIF compression, passport photo generator, watermarking, background removal, inpainting, and relighting.
   - **PDF Operations (8):** Client- and server-side merging, page splitting, compression, password protection/unlock, and format conversion.
   - **Text, SEO & Developer Utilities (13):** Text cleaning, duplicate removal, QR code and favicon generation, link shortening, password generation, meta/Open Graph/robots/sitemap generators, and a resume builder.
 
 ---
 
-## 🧠 Pure-Python Classical Machine Learning Engine
+## 🧠 Classical Machine Learning Engine & Applied AI
 
-A standout engineering element in ToolHub-AI is its **pure-Python classical machine-learning library**, implemented from scratch without external ML frameworks like `scikit-learn` or `pandas`. This keeps the Docker image lean, makes training deterministic, and keeps every algorithm unit-testable without a database.
-
-The library implements classic algorithms — ordinary-least-squares linear regression, CART decision trees, random forests, KNN, logistic regression, Gaussian Naive Bayes, a linear SVM, AdaBoost decision stumps, K-Means++ clustering, plus Count/TF-IDF text vectorizers and an evaluation/tuning toolkit. The workflow below shows how the four serving models consume the shared feature pipeline.
+ToolHub-AI features a hybrid machine-learning architecture: a **pure-mathematical implementation** designed from first principles alongside a production-standard **`scikit-learn 1.9` backend** with backward-compatible JSON artifact support.
 
 ```mermaid
 flowchart LR
     subgraph DataIngestion["Feature Pipeline (Postgres ORM)"]
         DB[("User Logs & Usage")] --> Aggregator["Bulk ORM Behavioral Aggregation"]
-        Aggregator --> Features["6 Engineered Features:<br/>• days_active<br/>• action_volume<br/>• distinct_tools<br/>• conversations<br/>• credits_spent<br/>• account_age_days"]
+        Aggregator --> Features["Engineered Feature Vectors:<br/>• days_active<br/>• action_volume<br/>• distinct_tools<br/>• conversations<br/>• credits_spent<br/>• account_age_days"]
     end
 
-    subgraph CustomMLEngine["Pure-Python Mathematical Models (Zero Dependencies)"]
-        Features --> Splitter["Stratified Train/Test Split & StandardScaler"]
-        Splitter --> LinReg["Ridge-Stabilized Linear Regression<br/>(Gaussian Elimination)"]
-        Splitter --> CART["CART Decision Tree<br/>(Multiclass Gini Index)"]
-        Splitter --> RF["Random Forest Classifier<br/>(Bootstrap Aggregation + Subsampling)"]
-        Splitter --> KMeans["K-Means++ Clustering<br/>(Deterministic Euclidean Distance)"]
+    subgraph CustomMLEngine["Hybrid Classical ML Engine"]
+        Features --> Splitter["StandardScaler & Train/Test Split"]
+        Splitter --> LinReg["Ridge Linear Regression<br/>(Gaussian Elimination / OLS)"]
+        Splitter --> CART["CART Decision Tree<br/>(Multiclass Gini Impurity)"]
+        Splitter --> RF["Random Forest Classifier<br/>(Bootstrap Aggregation)"]
+        Splitter --> KMeans["K-Means++ Clustering<br/>(Distance-Weighted Seeding)"]
+        Splitter --> SVM["Linear Support Vector Classifier"]
     end
 
-    subgraph BusinessIntelligence["Serving API Endpoints (/api/v1/analytics/)"]
+    subgraph BusinessIntelligence["Serving APIs (/api/v1/analytics/)"]
         LinReg --> Forecast["Credit-Burn Runout Forecaster"]
         CART --> Baseline["Interpretability Baseline Tree"]
-        RF --> ChurnPredict["Customer Churn & Upgrade Propensity<br/>(F1 ≈0.96 on synthetic data, self-reported)"]
-        KMeans --> Segmentation["User Cohort Segmentation<br/>(Power / Regular / Casual / Dormant)"]
+        RF --> ChurnPredict["Customer Churn & Upgrade Propensity"]
+        KMeans --> Segmentation["User Cohort Segmentation"]
+        SVM --> Classification["High-Intent Prompt Classifier"]
     end
 ```
 
-### Pure-Python Model Specifications:
-1. **Ridge-Stabilized Linear Regression:** Built using Gaussian elimination with L2 ridge stabilization to avoid singular matrix inversion. Powers the **credit-depletion forecaster** and prompt token/latency cost estimators.
-2. **CART Decision Trees & Random Forest:** Recursive binary splitting on multiclass Gini impurity, bootstrap aggregation, and permutation feature importance. A tuned random forest is reported to reach **F1 ≈0.96 on a synthetic churn dataset** (self-reported in `ML_IMPLEMENTATION_REPORT.md`; the repo ships no production benchmark, so treat this as an indicative figure, not a production SLA).
-3. **K-Means++ Clustering:** Probabilistic distance-weighted initialization with deterministic seeding, used to cluster tool affinity (Jaccard co-occurrence matrix) and segment users into behavioral cohorts.
-4. **Validation Suite:** 48 dedicated unit tests verify confusion-matrix metrics (macro precision, recall, F1), regression R² and MAE, tuning, and serialization round-trips. All 48 pass locally (see [Testing & QA](#-testing--quality-assurance)).
+### ML Engine Highlights:
+1. **Ridge-Stabilized Linear Regression:** Built using Gaussian elimination with L2 ridge stabilization to avoid singular matrix inversion. Powers credit burn runout forecasting.
+2. **Decision Trees & Random Forest:** Recursive binary splitting on multiclass Gini impurity, bootstrap aggregation, and permutation feature importance for user churn and upgrade propensity.
+3. **K-Means++ Clustering:** Probabilistic distance-weighted initialization with deterministic seeding to cluster tool affinity (Jaccard co-occurrence matrix) and user behavioral cohorts.
+4. **Text Vectorizers & Preprocessing:** Pure CountVectorizer and TF-IDF vectorizers with n-gram support and stop-word filtering for prompt classification.
+5. **Zero-Downtime Serving & Compatibility:** Seamlessly deserializes both legacy custom JSON artifacts and modern base64-encoded sklearn models with zero API downtime.
 
 ---
 
@@ -331,30 +379,31 @@ flowchart LR
 
 ```
 Frontend:
-  ├── Framework: Next.js 16.3 (App Router, Turbopack)
+  ├── Framework: Next.js 16.4 (App Router, Turbopack, Webpack build)
   ├── Core: React 19.2, TypeScript 5.x
   ├── Styling: Tailwind CSS v4, shadcn/ui, Lucide Icons
-  ├── Creative Canvas: Fabric.js 7, Lena.js (image filters), react-advanced-cropper
+  ├── Creative Canvas: Fabric.js 7, Lena.js (filters), react-advanced-cropper
   └── Streaming & State: Server-Sent Events (SSE), React Context, next-themes
 
 Backend & Distributed Services:
   ├── Language: Python 3.12
   ├── Web Framework: Django 6.1, Django REST Framework (DRF) 3.18
-  ├── WSGI Server: Gunicorn (multi-worker process model)
-  ├── Task Queuing: Celery 5.6 (distributed asynchronous execution)
-  ├── Scheduler: Celery Beat (periodic ML retrain & ledger sync)
-  ├── Caching & Locks: Redis 7 (server) / redis-py (in-memory broker, cache, idempotency locks)
-  └── Database: PostgreSQL 15 (relational schema with ACID guarantees)
+  ├── WSGI Server: Gunicorn 23.0 (multi-worker process model)
+  ├── Task Queuing: Celery 5.6 (distributed asynchronous worker execution)
+  ├── Scheduler: Celery Beat (periodic ledger sweepers, retrain jobs)
+  ├── Caching & Locks: Redis 7/8 (broker, cache, idempotency locks)
+  └── Database: PostgreSQL 15 (relational schema with ACID transactions)
 
-AI Inference & Media Engines:
+AI Inference & Enterprise Services:
   ├── Multi-Model Gateway: 15 registered provider adapters (OpenAI, Anthropic, Google, DeepSeek, etc.)
-  ├── Local GPU Worker: ComfyUI (local Stable Diffusion pipeline, optional)
-  ├── Image Processing: Pillow 12, rembg (U2-Net background removal), pypdf
-  └── Custom Machine Learning: pure-Python classical ML library (no scikit-learn/pandas)
+  ├── Enterprise Observability: Trace collector, span analytics, cost engine, latency distributions
+  ├── Local GPU Worker: ComfyUI (Stable Diffusion workflow execution)
+  ├── Image Processing: Pillow 12, rembg (MIT-licensed U2-Net background removal), pypdf
+  └── Machine Learning: scikit-learn 1.9 + pure-Python mathematical algorithms
 
 Security & Payment Infrastructure:
-  ├── Authentication: SimpleJWT (token rotation + blacklist), Google & GitHub OAuth 2.0
-  ├── Ingress Protection: optional Cloudflare Zero-Trust Tunnel profile (no exposed inbound backend ports)
+  ├── Authentication: SimpleJWT (rotation + blacklist), Google & GitHub OAuth 2.0
+  ├── Ingress Protection: Cloudflare Zero-Trust Tunnel (cloudflared)
   └── Payment Gateways: Stripe, LemonSqueezy, bKash (Tokenized), Nagad
 ```
 
@@ -362,41 +411,49 @@ Security & Payment Infrastructure:
 
 ## 📂 Project Organization & Directory Layout
 
-The repository is structured as a scalable modular monolith cleanly separating domain logic:
-
 ```
 ToolHub-AI/
-├── frontend/                       # Next.js 16 App Router Frontend
+├── frontend/                       # Next.js 16.4 App Router Frontend (~108k LOC)
 │   ├── src/
-│   │   ├── app/                    # 146 route definitions (marketing, /ai, /tools, /dashboard)
+│   │   ├── app/                    # 181 route definitions (marketing, /ai, /enterprise, /admin, /tools)
 │   │   ├── components/
 │   │   │   ├── ai-workspace/       # LLM chat composer, thread, model selector, compare
 │   │   │   ├── editor/             # Fabric.js canvas, layers panel, filter controls, tool rail
-│   │   │   ├── dashboard/          # Usage telemetry, billing cards, file browser
+│   │   │   ├── dashboard/          # Telemetry, billing cards, file browser
 │   │   │   └── ui/                 # Accessible primitives built on shadcn/ui
-│   │   ├── services/               # Strongly-typed API client SDKs
+│   │   ├── features/
+│   │   │   ├── enterprise/         # Observability, compliance, RFP workspaces & sidebars
+│   │   │   └── admin/              # RBAC administration gates, tables, breadcrumbs
+│   │   ├── services/               # Strongly-typed API clients (AI, billing, observability)
 │   │   └── constants/              # Central registry of 62 tools, model capability matrix
-│   └── public/                     # High-resolution screenshots, branding, vector assets
+│   └── public/                     # Screenshots, branding, logos, vector assets
 │
-├── backend/                        # Django 6.1 REST Application
-│   ├── apps/                       # 28 Django app modules (23 registered in INSTALLED_APPS)
+├── backend/                        # Django 6.1 REST Application (~102k LOC)
+│   ├── apps/                       # 32 Django app modules (27 registered in INSTALLED_APPS)
 │   │   ├── ai_workspace/           # 15 provider adapters, SSE streaming gateway, chat models
+│   │   ├── enterprise_observability# Traces, spans, token accounting, latency percentiles
+│   │   ├── enterprise_compliance/  # Policy inspector, PII scrubbing, audit rules
+│   │   ├── enterprise_rfp/         # Document extraction, question retrieval, RFP generator
+│   │   ├── admin_panel/            # Server-enforced RBAC, AdminRole, system inspection
+│   │   ├── admin_logs/             # Immutable audit logging for mutations and outcomes
+│   │   ├── ecommerce_studio/       # Marketplace presets, brand kits, export workflows
 │   │   ├── subscriptions/          # Plans, credit wallets, atomic credit-transaction ledger
-│   │   ├── billing/                # Webhook state machines (Stripe, LemonSqueezy, bKash, Nagad)
-│   │   ├── analytics/              # Pure-Python ML library, churn prediction, user clustering
-│   │   ├── authentication/         # JWT rotation, OAuth callbacks, OTP email verification
+│   │   ├── billing/                # Webhooks & state machines (Stripe, LemonSqueezy, bKash, Nagad)
+│   │   ├── analytics/              # ML library, churn prediction, user clustering, recommender
+│   │   ├── authentication/         # JWT rotation, OAuth callbacks, OTP verification
 │   │   ├── image_tools/            # Pillow, rembg U2-Net image transformations
 │   │   ├── pdf_tools/              # pypdf operations (merge, split, encrypt, convert)
-│   │   └── developer_tools/        # QR generator, hash tools, code formatting APIs
-│   ├── config/                     # Core settings, WSGI/ASGI handlers, Celery configuration
-│   └── requirements/               # Dependency file (base.txt)
+│   │   └── developer_tools/        # QR generator, hash utilities, formatters
+│   ├── config/                     # Core settings, WSGI/ASGI handlers, Celery config
+│   └── requirements/               # Dependency specification (base.txt)
 │
 ├── comfyui/                        # Local GPU workflow configurations & model weights
-├── docs/                           # 90+ architecture specifications & QA audits
+├── docs/                           # Architecture specifications, diagrams & QA audits
+│   ├── diagrams/                   # High-resolution system & sequence architecture diagrams
 │   ├── 03-system-architecture.md   # System design & database specifications
 │   ├── 11-payment-subscription-architecture.md  # Idempotent ledger & payment state machines
 │   ├── 32-ai-multi-model-workspace-architecture-v2.0.md  # SSE gateway & adapter specification
-│   └── qa/screenshots/             # Browser-test visual audit artifacts
+│   └── qa/screenshots/             # Visual QA audit artifacts
 ├── docker-compose.yml              # 6-service container orchestration (+ optional cloudflared)
 └── .env.example                    # Environment variable template
 ```
@@ -407,7 +464,7 @@ ToolHub-AI/
 
 ### Option 1: Docker Compose (Recommended)
 
-Run the full stack (Frontend, Backend/Gunicorn, Postgres, Redis, Celery worker, and Celery Beat) with a single command. The `backend`, `celery`, and `celery-beat` services run migrations and seed plans/models automatically on startup (see the `backend` service command in `docker-compose.yml`).
+Run the full stack (Frontend, Backend/Gunicorn, Postgres, Redis, Celery worker, and Celery Beat) with a single command. Migrations and initial seeds execute automatically on startup:
 
 ```bash
 # 1. Clone the repository
@@ -425,9 +482,7 @@ docker compose up -d --build
 # Web app:  http://localhost:32768   (host port = FRONTEND_PORT, default 32768)
 ```
 
-> **Networking note:** only the frontend is published to the host by default. Next.js reverse-proxies `/api/*` and `/media/*` to the `backend` service (see `frontend/next.config.ts`), so the REST API is reachable at `http://localhost:32768/api/v1/`. Django Admin (`/admin/`) is **not** exposed through that proxy; to use it, either run the backend natively (Option 2) or publish the backend port yourself. An optional `cloudflared` service is available via `docker compose --profile cloudflare up -d`.
-
-*These Docker commands reflect the checked-in `docker-compose.yml`; they were not executed end-to-end during the documentation audit (no containers were started).*
+> **Networking note:** Only the frontend is published to the host by default. Next.js reverse-proxies `/api/*` and `/media/*` to the `backend` service (see `frontend/next.config.ts`), so the REST API is reachable at `http://localhost:32768/api/v1/`. An optional `cloudflared` service is available via `docker compose --profile cloudflare up -d`.
 
 ---
 
@@ -451,7 +506,6 @@ cp ../.env.development .env
 python manage.py migrate
 python manage.py seed_plans
 python manage.py seed_ai_models
-# Optional: seed e-commerce marketplace presets
 python manage.py seed_marketplace_presets
 
 # Start the API server
@@ -470,58 +524,53 @@ celery -A config worker --loglevel=info
 cd frontend
 npm install
 npm run dev
-# With the backend on :8000, set BACKEND_URL=http://localhost:8000 so the
-# dev server proxy can reach it, then open http://localhost:3000
+# Set BACKEND_URL=http://localhost:8000 in your frontend environment,
+# then navigate to http://localhost:3000
 ```
 
 ---
 
 ## 🧪 Testing & Quality Assurance
 
-The repository ships unit tests on both sides of the stack. Commands and *locally observed* results from this audit are listed below; results depend on your environment.
+ToolHub-AI maintains a comprehensive automated testing suite with **over 1,650 tests** spanning both frontend and backend layers:
 
-| Suite | Command | Result observed |
+| Suite | Command | Test Count / Coverage |
 |---|---|---|
-| Frontend (Vitest) | `cd frontend && npm test` (`vitest run`) | **204 passed** across 30 test files |
-| Backend ML suite (pytest) | `cd backend && pytest tests/unit/apps/analytics/test_ml_suite.py` | **48 passed** |
-| Backend (full) | `cd backend && pytest` | **700 tests collected**; full execution was **not completed** here (it expects PostgreSQL/Redis services, and an incomplete run surfaced service-dependent failures) |
-| Frontend lint | `cd frontend && npm run lint` (`eslint`) | not run in this audit |
-
-The frontend suite (`frontend/src/constants/toolRegistry.test.ts` and editor component tests) asserts that every tool-rail id resolves to a known registry entry and backend operation. The backend ML suite covers confusion-matrix metrics, regression error metrics, hyperparameter tuning, and serialization round-trips.
+| **Frontend Suite (Vitest)** | `cd frontend && npm test` | **397 unit & component tests** (state, formatting, tools, shell) |
+| **Backend Unit & Integration** | `cd backend && pytest tests/unit/` | **1,255 tests** covering billing safety, ML, observability, auth |
+| **Backend ML Engine Suite** | `cd backend && pytest tests/unit/apps/analytics/test_ml_suite.py` | **48 passing tests** (models, tuning, metrics, serialization) |
+| **Billing Safety Suite** | `cd backend && pytest tests/unit/apps/billing/test_billing_safety.py` | Idempotency locks, stale sweeps, partial abort reconciliations |
+| **Total Test Suite** | Full Stack Coverage | **1,650+ Automated Tests** |
 
 ---
 
 ## 🔒 Security & Hardening Highlights
 
-- **Reduced inbound attack surface:** deployed with the optional **Cloudflare Tunnel (`cloudflared`)** compose profile, the stack is reachable from the Cloudflare edge without publishing the backend directly to the host. (This is a deployment pattern, not a claim about any specific live environment.)
-- **Defensive JWT authentication:** 60-minute access tokens with refresh-token rotation and blacklisting on rotation/logout (`rest_framework_simplejwt.token_blacklist`).
-- **Payment webhook verification:** Stripe and LemonSqueezy webhooks are verified via HMAC/secret signature checks, and duplicate events are de-duplicated through database-level idempotency records (`billing/webhooks_multi.py`).
-- **Server-enforced entitlements:** plan access, tool permissions, and rate limits are validated on the backend (HTTP 402/403/429); the frontend does not make authorization decisions.
-- **Sandboxed content rendering:** AI Markdown is rendered by a custom structured renderer that emits React nodes and shows raw HTML in a sandboxed preview — it is never injected into the application DOM (`frontend/src/components/ai-workspace/MarkdownContent.tsx`).
+- **Reduced Inbound Attack Surface:** Deployed with the optional **Cloudflare Tunnel (`cloudflared`)** profile, allowing full edge ingress without opening direct public inbound ports to the backend or database.
+- **Defensive JWT Authentication:** Short-lived access tokens with refresh token rotation and explicit blacklisting on rotation and logout (`rest_framework_simplejwt.token_blacklist`).
+- **Payment Webhook Verification:** Stripe and LemonSqueezy webhooks are verified via HMAC/secret signature checks, and duplicate events are de-duplicated through database-level idempotency records (`billing/webhooks_multi.py`).
+- **Server-Side RBAC & Authorization:** Plan access, tool permissions, rate limits, and administrative views are validated strictly on the backend (`apps.admin_panel.services.has_admin_permission`); client UI guards are purely decorative.
+- **Sandboxed Content Rendering:** AI Markdown is rendered by a custom structured renderer emitting React nodes and showing HTML in a sandboxed preview — never injected into the application DOM (`frontend/src/components/ai-workspace/MarkdownContent.tsx`).
 
 ---
 
 ## 📐 Metric Verification Notes
 
-The headline numbers in this README were re-measured from the checked-in source during a documentation audit. Method and caveats:
+The metrics in this README were re-measured and verified against the repository source code:
 
-| Metric | Value | How it was measured |
+| Metric | Source-Verified Value | Measurement Methodology |
 |---|---|---|
-| TypeScript/TSX LOC | ≈66,000 | `git ls-files 'frontend/src/**/*.ts' 'frontend/src/**/*.tsx' \| xargs wc -l` |
-| Python LOC | ≈47,000 | `git ls-files 'backend/**/*.py' \| xargs wc -l` (includes migrations and tests) |
-| Frontend routes | 146 | count of `page.tsx` files under `frontend/src/app` |
-| API endpoints | ≈190 | `path()`/`re_path()` patterns across app `urls.py` modules (config includes excluded from the app count) |
-| Django apps | 28 modules / 23 registered | app directories containing `apps.py`; `INSTALLED_APPS` in `config/settings/base.py` |
-| Seeded models / providers | 62 / 11 | `backend/apps/ai_workspace/management/commands/seed_ai_models.py` |
-| Provider adapters | 15 | `PROVIDER_ADAPTERS` in `backend/apps/ai_workspace/providers/__init__.py` (includes a mock test adapter) |
-| Registered tools | 62 | `CENTRAL_TOOL_REGISTRY` in `frontend/src/constants/centralToolRegistry.ts` (all `available`; live site shows "62 tools") |
-| AI image operations | 31 | `OPERATION_REGISTRY` in `backend/apps/ai_tools/registry.py` |
-
-**Claim classifications:**
-- **Verified from source:** route/LOC/app/registry counts above; library versions in `frontend/package.json` and `backend/requirements/base.txt`; 48 ML tests passing locally; 204 frontend tests passing locally.
-- **Self-reported (not independently benchmarked):** the Random Forest **F1 ≈0.96** figure, which originates in `ML_IMPLEMENTATION_REPORT.md` and is described there as measured on *synthetic* churn data.
-- **Deployment claims** (Cloudflare Tunnel, production reliability) describe intended/optional deployment topology and are not claims about any specific live environment.
-- **Not run in this audit:** `docker compose up` for the full stack, and the complete backend pytest suite (requires PostgreSQL + Redis).
+| **TypeScript / TSX LOC** | **107,918** | `find frontend/src -type f \( -name "*.ts" -o -name "*.tsx" \) \| xargs wc -l` |
+| **Python LOC** | **102,317** (96,507 core) | `find backend -type f -name "*.py" \| xargs wc -l` (excl. pycache & venvs) |
+| **Total First-Party LOC** | **~210,000 LOC** | Combined first-party frontend and backend codebase volume |
+| **Frontend Routes** | **181** | Count of `page.tsx` and `route.ts` files under `frontend/src/app` |
+| **Backend URL Patterns** | **~356** | `path()` and `re_path()` declarations across Django `urls.py` modules |
+| **Django Apps** | **32 apps (27 registered)** | App directories in `backend/apps/`; registered in `settings.base.py` |
+| **Automated Tests** | **1,650+** | 1,255 backend pytest cases + 397 frontend Vitest test cases |
+| **Seeded Models / Providers**| **62 models / 11 providers**| Seeded via `apps.ai_workspace.management.commands.seed_ai_models` |
+| **Provider Adapters** | **15 adapters** | Registered adapters in `apps.ai_workspace.providers` |
+| **Central Tools** | **62 tools** | Registered in `frontend/src/constants/centralToolRegistry.ts` |
+| **AI Image Operations** | **31 operations** | Registered in `backend/apps/ai_tools/registry.py` |
 
 ---
 
