@@ -365,11 +365,11 @@ Full authentication lifecycle and responsive mobile viewports optimized across d
 | Secure Authentication & Session Gate | Mobile Responsive Viewport (390px) |
 |:---:|:---:|
 | <a href="docs/qa/screenshots/01-login-filled.jpg"><img src="docs/qa/screenshots/01-login-filled.jpg" alt="Authentication Portal" width="100%"/></a> | <a href="docs/qa/screenshots/30-mobile390-batch.jpg"><img src="docs/qa/screenshots/30-mobile390-batch.jpg" alt="Mobile 390px Responsive Batch Processing" width="100%"/></a> |
-
+<!-- 
 | Canvas History Stack & Timeline | Non-Destructive Layer Reversion (Undo/Redo) |
 |:---:|:---:|
 | <a href="docs/qa/screenshots/23b-editor-history.jpg"><img src="docs/qa/screenshots/23b-editor-history.jpg" alt="Canvas History Stack" width="100%"/></a> | <a href="docs/qa/screenshots/41-after-undo.jpg"><img src="docs/qa/screenshots/41-after-undo.jpg" alt="Non-Destructive Undo" width="100%"/></a> |
-
+-->
 ---
 
 ## ⚡ Core Engineering Innovations
